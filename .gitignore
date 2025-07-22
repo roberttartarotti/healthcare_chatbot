@@ -205,3 +205,329 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# =============================================================================
+# CONTAINERIZATION & ORCHESTRATION
+# =============================================================================
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+docker-compose.override.yaml
+Dockerfile.dev
+Dockerfile.prod
+Dockerfile.test
+.docker/
+
+# Kubernetes
+*.kubeconfig
+kubeconfig
+.kube/
+
+# Helm
+charts/*/charts/
+charts/*/requirements.lock
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.backup
+
+# Ansible
+*.retry
+ansible.cfg
+hosts
+inventory/
+
+# =============================================================================
+# MACHINE LEARNING & LLM DEVELOPMENT
+# =============================================================================
+
+# Model files and datasets
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+*.pb
+*.pth
+*.pt
+*.safetensors
+*.bin
+*.gguf
+*.ggml
+*.ggla
+
+# Large datasets
+data/raw/
+data/processed/
+data/external/
+datasets/
+*.csv
+*.json
+*.parquet
+*.feather
+*.arrow
+*.hdf
+*.h5
+*.npy
+*.npz
+
+# Model checkpoints and artifacts
+checkpoints/
+models/
+artifacts/
+runs/
+wandb/
+mlruns/
+.mlflow/
+
+# Jupyter notebook outputs
+.ipynb_checkpoints/
+*.ipynb
+
+# MLflow
+mlruns/
+.mlflow/
+
+# Weights & Biases
+wandb/
+
+# TensorBoard
+logs/
+tensorboard_logs/
+
+# Hugging Face
+.cache/huggingface/
+transformers_cache/
+
+# OpenAI API keys and configs
+.openai/
+openai_config.json
+
+# LangChain
+.langchain/
+langchain.db
+
+# =============================================================================
+# CLOUD & DEVOPS
+# =============================================================================
+
+# AWS
+.aws/
+aws.json
+aws.yml
+aws.yaml
+
+# Google Cloud
+.gcloud/
+service-account-key.json
+*.json
+
+# Azure
+.azure/
+azure-credentials.json
+
+# Heroku
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel/
+
+# Netlify
+.netlify/
+
+# CI/CD
+.github/workflows/*.yml.bak
+.gitlab-ci.yml.bak
+.circleci/config.yml.bak
+
+# =============================================================================
+# DATABASES
+# =============================================================================
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# PostgreSQL
+*.sql
+*.dump
+
+# MongoDB
+*.bson
+
+# Redis
+dump.rdb
+
+# =============================================================================
+# SECURITY & CREDENTIALS
+# =============================================================================
+
+# API Keys and secrets
+secrets/
+secrets.json
+secrets.yml
+secrets.yaml
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+
+# SSH keys
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# GPG
+*.gpg
+*.asc
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# Pre-commit
+.pre-commit-config.yaml.bak
+
+# Black
+.black.toml
+
+# isort
+.isort.cfg
+
+# Flake8
+.flake8
+
+# Bandit
+.bandit
+
+# Safety
+.safety/
+
+# Ruff (already covered above, but ensuring it's clear)
+.ruff_cache/
+
+# MyPy (already covered above, but ensuring it's clear)
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Lizard (code complexity analyzer)
+.lizard/
+lizard_report.html
+lizard_report.xml
+lizard_report.txt
+
+# Pytest (already covered above, but ensuring it's clear)
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+
+# =============================================================================
+# LOGS & TEMPORARY FILES
+# =============================================================================
+
+# Log files
+logs/
+*.log
+*.log.*
+log/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# =============================================================================
+# MONITORING & OBSERVABILITY
+# =============================================================================
+
+# Prometheus
+prometheus.yml
+prometheus.yaml
+
+# Grafana
+grafana/
+
+# Jaeger
+jaeger/
+
+# Zipkin
+zipkin/
+
+# =============================================================================
+# TESTING & QUALITY ASSURANCE
+# =============================================================================
+
+# Test coverage
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Performance testing
+locust_stats.csv
+locust_stats_history.csv
+
+# Security scanning
+.snyk
+.semgrep/
+
+# =============================================================================
+# BACKUP & ARCHIVE FILES
+# =============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# Archive files
+*.tar
+*.tar.gz
+*.tar.bz2
+*.zip
+*.rar
+*.7z
+
+# =============================================================================
+# PROJECT-SPECIFIC
+# =============================================================================
+
+# Healthcare chatbot specific
+patient_data/
+medical_records/
+healthcare_config.json
+hl7_messages/
+fhir_resources/
