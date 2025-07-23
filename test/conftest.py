@@ -16,6 +16,9 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "test_rabbitmq_container: mark test to run RabbitMQ container tests"
     )
+    config.addinivalue_line(
+        "markers", "test_celery: mark test to run Celery tests"
+    )
 
 
 @pytest.fixture(scope="session")
@@ -70,4 +73,41 @@ def rabbitmq_management_url() -> str:
     host = config("RABBITMQ_HOST", default="localhost")
     port = config("RABBITMQ_MANAGEMENT_PORT", default="15672")
     
-    return f"http://{user}:{password}@{host}:{port}/api" 
+    return f"http://{user}:{password}@{host}:{port}/api"
+
+
+@pytest.fixture
+def celery_broker_url() -> str:
+    """
+    Return Celery broker URL (same as RabbitMQ URL).
+    
+    Returns:
+        str: Celery broker URL
+    """
+    return rabbitmq_url()
+
+
+@pytest.fixture
+def celery_config() -> dict:
+    """
+    Return Celery configuration for testing.
+    
+    Returns:
+        dict: Celery configuration
+    """
+    return {
+        "broker_url": rabbitmq_url(),
+        "result_backend": "rpc://",
+        "task_serializer": "json",
+        "accept_content": ["json"],
+        "result_serializer": "json",
+        "timezone": "America/Sao_Paulo",
+        "enable_utc": True,
+        "worker_concurrency": 2,
+        "worker_prefetch_multiplier": 1,
+        "worker_max_tasks_per_child": 100,
+        "task_always_eager": False,
+        "task_eager_propagates": True,
+        "task_ignore_result": False,
+        "task_store_eager_result": True,
+    } 

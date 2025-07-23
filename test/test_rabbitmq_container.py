@@ -30,40 +30,35 @@ def wait_for_rabbitmq(host='localhost', port=5672, timeout=30):
     return False
 
 
-def start_rabbitmq_container():
-    """Start RabbitMQ container for tests."""
-    subprocess.run(["docker-compose", "up", "-d", "rabbitmq"], check=True)
-    time.sleep(5)
-
-
-def stop_rabbitmq_container():
-    """Stop RabbitMQ container."""
-    subprocess.run(["docker-compose", "stop", "rabbitmq"], check=True)
-
-
 @pytest.mark.test_rabbitmq_container
 class TestRabbitMQContainer:
     """Test suite for RabbitMQ container functionality."""
     
-    @classmethod
-    def setup_class(cls):
-        """Start RabbitMQ container before all tests in this class."""
-        start_rabbitmq_container()
-    
-    @classmethod
-    def teardown_class(cls):
-        """Stop RabbitMQ container after all tests in this class."""
-        stop_rabbitmq_container()
-    
     def test_container_is_running(self):
         """Test that RabbitMQ container is running."""
+        time.sleep(2)
+        
         result = subprocess.run(
             ["docker", "ps", "--filter", "name=healthcare_rabbitmq", "--format", "{{.Status}}"],
             capture_output=True,
             text=True
         )
-        assert result.returncode == 0
-        assert "Up" in result.stdout
+        
+        if result.returncode != 0:
+            pytest.skip(f"Docker command failed: {result.stderr}")
+        
+        if not result.stdout.strip():
+            subprocess.run(["docker-compose", "up", "-d", "rabbitmq"], capture_output=True)
+            time.sleep(10)
+            
+            result = subprocess.run(
+                ["docker", "ps", "--filter", "name=healthcare_rabbitmq", "--format", "{{.Status}}"],
+                capture_output=True,
+                text=True
+            )
+        
+        assert result.returncode == 0, f"Docker command failed: {result.stderr}"
+        assert "Up" in result.stdout, f"RabbitMQ container not running. Status: {result.stdout}"
     
     def test_rabbitmq_connection(self, rabbitmq_url):
         """Test basic RabbitMQ connection."""
@@ -141,18 +136,18 @@ class TestRabbitMQContainer:
             pytest.fail(f"Failed to access Management API: {e}")
     
     def test_health_check(self):
-        """Test container health check."""
-        import json
+        """Test RabbitMQ health check."""
+        if not wait_for_rabbitmq():
+            pytest.skip("RabbitMQ container not ready within timeout")
         
-        result = subprocess.run(
-            ["docker", "inspect", "healthcare_rabbitmq", "--format", "{{json .State.Health.Status}}"],
-            capture_output=True,
-            text=True
-        )
-        
-        assert result.returncode == 0
-        health_status = result.stdout.strip().strip('"')
-        assert health_status in ["healthy", "starting"]
+        try:
+            response = requests.get("http://admin:password@localhost:15672/api/healthchecks/node", timeout=10)
+            assert response.status_code == 200
+            
+            data = response.json()
+            assert data["status"] == "ok"
+        except Exception as e:
+            pytest.fail(f"Health check failed: {e}")
     
     def test_management_ui_accessible(self):
         """Test that Management UI is accessible."""
@@ -171,8 +166,17 @@ class TestRabbitMQContainer:
         if not wait_for_rabbitmq():
             pytest.skip("RabbitMQ container not ready within timeout")
         
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        result = sock.connect_ex(('localhost', 5672))
-        sock.close()
-        
-        assert result == 0, "AMQP port 5672 is not accessible" 
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
+            result = sock.connect_ex(('localhost', 5672))
+            sock.close()
+            assert result == 0
+        except Exception as e:
+            pytest.fail(f"AMQP port not accessible: {e}")
+
+
+@pytest.fixture
+def rabbitmq_management_url():
+    """RabbitMQ Management API URL."""
+    return "http://admin:password@localhost:15672/api" 
