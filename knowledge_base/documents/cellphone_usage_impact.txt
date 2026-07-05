@@ -1,0 +1,55 @@
+Cellphone Usage and Health — Overview (sample document)
+
+This file is a fictional example used to test the knowledge-base feature.
+It summarizes commonly discussed effects of heavy smartphone use. It is not
+medical advice.
+
+Sleep
+Evening screen time, especially in bed, can delay sleep onset. Blue light may
+suppress melatonin, and notifications or social scrolling can keep the brain
+alert. Many sleep guidelines suggest stopping non-essential phone use 30 to 60
+minutes before bedtime.
+
+Mental health
+Frequent checking of messages and social feeds is associated with higher
+reported stress, anxiety, and fear of missing out in some studies. Passive
+scrolling without interaction may have a stronger negative association with
+mood than active messaging with close contacts.
+
+Attention and productivity
+Smartphones interrupt focus through alerts, vibrations, and the habit of
+checking the device during work or study. "Phubbing" — ignoring people in
+person to use a phone — can strain relationships and reduce perceived social
+support.
+
+Physical effects
+Prolonged use can contribute to:
+- Eye strain and dry eyes from small screens and reduced blinking
+- Neck and shoulder discomfort from looking down ("text neck")
+- Thumb or wrist pain from repetitive typing and gripping
+- Reduced physical activity when screen time replaces movement
+
+Driving and safety
+Using a handheld phone while driving increases crash risk. Hands-free use may
+still reduce attention to the road. Pedestrians distracted by phones are more
+likely to miss hazards at crossings.
+
+Children and adolescents
+Heavy daily use in younger users has been linked in research to poorer sleep,
+more sedentary time, and higher reported emotional difficulties. Parental
+guidance on limits, device-free meals, and bedtime routines is often
+recommended.
+
+Practical habits
+Common harm-reduction habits include:
+- Turning off non-essential notifications
+- Using do-not-disturb or focus modes during work and sleep
+- Setting daily screen-time limits for social apps
+- Keeping phones out of the bedroom
+- Taking regular breaks using the 20-20-20 rule for eyes: every 20 minutes,
+  look at something 20 feet away for 20 seconds
+
+When to seek help
+Consider talking to a healthcare provider if phone use feels uncontrollable,
+causes significant distress, interferes with sleep, work, or relationships, or
+leads to physical pain that does not improve with rest and posture changes.
